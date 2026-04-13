@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LLM Calculator — Privacy & Support</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #fafaf8;
+    --surface: #ffffff;
+    --text: #1a1a1f;
+    --text-dim: #6b6b78;
+    --accent: #00b892;
+    --accent-soft: #e8f8f4;
+    --border: #e8e8e4;
+    --radius: 14px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0e0e12;
+      --surface: #18181f;
+      --text: #e8e8f0;
+      --text-dim: #8888a0;
+      --accent: #00d4aa;
+      --accent-soft: #0d2a22;
+      --border: #2a2a34;
+    }
+  }
+
+  body {
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 80px 24px 120px;
+  }
+
+  /* Header */
+  .header {
+    margin-bottom: 64px;
+    text-align: center;
+  }
+
+  .app-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, var(--accent), #0088ff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 32px;
+    color: white;
+    box-shadow: 0 4px 20px rgba(0, 184, 146, 0.25);
+  }
+
+  .header h1 {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 38px;
+    font-weight: 400;
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+  }
+
+  .header p {
+    color: var(--text-dim);
+    font-size: 15px;
+  }
+
+  /* Navigation */
+  nav {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    margin-bottom: 56px;
+    flex-wrap: wrap;
+  }
+
+  nav a {
+    padding: 10px 20px;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+  }
+
+  nav a:hover, nav a.active {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: var(--accent-soft);
+  }
+
+  /* Sections */
+  .section {
+    margin-bottom: 56px;
+  }
+
+  .section h2 {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 26px;
+    font-weight: 400;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section p {
+    margin-bottom: 14px;
+    color: var(--text);
+    font-size: 15px;
+  }
+
+  .section p.dim {
+    color: var(--text-dim);
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    margin: 20px 0;
+  }
+
+  .card h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .card p {
+    font-size: 14px;
+    color: var(--text-dim);
+    margin-bottom: 0;
+  }
+
+  .highlight {
+    background: var(--accent-soft);
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin: 20px 0;
+    font-size: 15px;
+  }
+
+  .highlight strong {
+    color: var(--accent);
+  }
+
+  /* Contact */
+  .contact-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px;
+    text-align: center;
+    margin-top: 24px;
+  }
+
+  .contact-box a {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 12px 28px;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 600;
+    font-size: 14px;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .contact-box a:hover {
+    opacity: 0.85;
+  }
+
+  /* Footer */
+  footer {
+    margin-top: 80px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 13px;
+  }
+
+  footer span {
+    display: block;
+    margin-top: 4px;
+  }
+
+  /* Smooth scroll */
+  html { scroll-behavior: smooth; }
+
+  /* Animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .page > * {
+    animation: fadeUp 0.5s ease-out both;
+  }
+  .page > *:nth-child(1) { animation-delay: 0s; }
+  .page > *:nth-child(2) { animation-delay: 0.05s; }
+  .page > *:nth-child(3) { animation-delay: 0.1s; }
+  .page > *:nth-child(4) { animation-delay: 0.15s; }
+  .page > *:nth-child(5) { animation-delay: 0.2s; }
+  .page > *:nth-child(6) { animation-delay: 0.25s; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="app-icon">⚡</div>
+    <h1>LLM Calculator</h1>
+    <p>Know what runs on your device — before you download.</p>
+  </div>
+
+  <nav>
+    <a href="#privacy" class="active">Privacy Policy</a>
+    <a href="#support">Support</a>
+    <a href="#about">About</a>
+  </nav>
+
+  <!-- PRIVACY POLICY -->
+  <div class="section" id="privacy">
+    <h2>Privacy Policy</h2>
+    <p class="dim">Last updated: April 13, 2026</p>
+
+    <div class="highlight">
+      <strong>The short version:</strong> LLM Calculator does not collect, store, or share any personal data. Your privacy is fully respected.
+    </div>
+
+    <div class="card">
+      <h3>Data Collection</h3>
+      <p>LLM Calculator does not collect any personal information, usage data, analytics, or telemetry. The app operates entirely on your device.</p>
+    </div>
+
+    <div class="card">
+      <h3>Network Access</h3>
+      <p>The app may access the internet solely to retrieve publicly available model information from Hugging Face. No personal data is transmitted during these requests.</p>
+    </div>
+
+    <div class="card">
+      <h3>Third-Party Services</h3>
+      <p>LLM Calculator does not integrate any third-party analytics, advertising, or tracking services. There are no SDKs collecting data in the background.</p>
+    </div>
+
+    <div class="card">
+      <h3>Data Storage</h3>
+      <p>Any preferences or settings you configure are stored locally on your device only. Nothing is sent to external servers.</p>
+    </div>
+
+    <div class="card">
+      <h3>Children's Privacy</h3>
+      <p>The app does not knowingly collect any information from anyone, including children under the age of 13.</p>
+    </div>
+
+    <div class="card">
+      <h3>Changes to This Policy</h3>
+      <p>If this privacy policy is ever updated, changes will be reflected on this page with an updated date. Since the app collects no data, significant changes are unlikely.</p>
+    </div>
+  </div>
+
+  <!-- SUPPORT -->
+  <div class="section" id="support">
+    <h2>Support</h2>
+
+    <p>Having trouble with LLM Calculator? Here are some common things to check:</p>
+
+    <div class="card">
+      <h3>Model data isn't loading</h3>
+      <p>Make sure you have an active internet connection. The app fetches model information from Hugging Face's public API. If the issue persists, try restarting the app.</p>
+    </div>
+
+    <div class="card">
+      <h3>RAM calculation seems off</h3>
+      <p>The calculator estimates RAM usage based on model parameters and quantization format. Actual usage may vary slightly depending on your system's available memory and other running applications.</p>
+    </div>
+
+    <div class="card">
+      <h3>Need help with something else?</h3>
+      <p>Reach out via email and I'll get back to you as soon as possible.</p>
+    </div>
+
+    <div class="contact-box">
+      <p>For bugs, questions, or feature requests:</p>
+      <a href="mailto:YOUREMAIL@EMAIL.COM">Contact Support</a>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="section" id="about">
+    <h2>About</h2>
+    <p>LLM Calculator was built to solve a simple problem: figuring out which AI models can actually run on your hardware without downloading them first.</p>
+    <p>It calculates RAM requirements across different quantization formats and context window sizes, giving you a clear compatibility rating in seconds. Browse thousands of GGUF models from Hugging Face and make informed decisions about local AI.</p>
+    <p>Built natively for Apple platforms.</p>
+  </div>
+
+  <footer>
+    &copy; 2026 LLM Calculator. All rights reserved.
+    <span>Made with care for the local AI community.</span>
+  </footer>
+
+</div>
+</body>
+</html>
